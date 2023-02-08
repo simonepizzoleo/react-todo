@@ -1,25 +1,125 @@
-import logo from './logo.svg';
+// Imports
+import React, { Component } from "react";
 import './App.css';
+import Footer from "./Footer";
+import Header from "./Header";
+import Tasks from "./Tasks";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// App
+class App extends Component {
+
+    
+    // State
+    state = {
+
+        id: 0,
+        inputKeyword: '',
+        todos: []
+
+    };
+
+    // Trigger the Focus on the Input
+    triggerInputFocus = () => {
+        const INPUT = document.querySelector('.todo-container__footer input');
+        INPUT.focus();
+    }
+
+    // Handle Checkbox change
+    handleCheckboxChange = (taskID) => {
+
+        let todosCopy = [...this.state.todos];
+        let matchingElement = todosCopy.find((element) => element.id === taskID);
+        matchingElement.completed = !matchingElement.completed;
+
+        this.setState({
+            todos: todosCopy
+        });
+
+    }
+
+    // Handle Input change
+    handleInputChange = (event) => {
+
+        let { value } = event.target;
+        
+        this.setState({
+            inputKeyword: value
+        });
+
+    }
+
+    // Handle 'Add new' button
+    handleAddNew = () => {
+
+        // Return if the Input Keyword is invalid
+        let keyword = this.state.inputKeyword;
+        keyword = keyword.trim();
+
+        if (!keyword || keyword === '') return;
+
+        const NEW_TODO = { id: this.state.id, activity: keyword, completed: false };
+
+        this.setState({
+            todos: [...this.state.todos, NEW_TODO],
+            inputKeyword: ''
+        });
+        
+        this.setState((state) => {
+
+            return ({
+                id: state.id + 1
+            })
+
+        });
+
+        this.triggerInputFocus();
+
+    }
+
+    // Handle Delete
+    handleDelete = (taskID) => {
+
+        let todosCopy = [...this.state.todos];
+        let matchingElement = todosCopy.find((element) => element.id === taskID);
+        let matchingElementIndex = todosCopy.findIndex((element) => element.id === matchingElement.id);
+        
+        todosCopy.splice(matchingElementIndex, 1);
+
+        this.setState({
+            todos: todosCopy
+        });
+
+    }
+
+    // Render
+    render() {
+
+        return(
+            
+            <div className="todo-container">
+                
+                <Header />
+
+                <Tasks
+                    todos={ this.state.todos }
+                    handleCheckboxChange={ this.handleCheckboxChange }
+                    handleDelete={ this.handleDelete }
+                />
+
+                <Footer
+                    triggerInputFocus={ this.triggerInputFocus }
+                    inputKeyword={ this.state.inputKeyword }
+                    handleInputChange={ this.handleInputChange }
+                    handleAddNew={ this.handleAddNew }
+                />
+
+            </div>
+            
+        );
+
+    }
+
 }
 
+// Export the App
 export default App;

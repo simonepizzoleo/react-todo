@@ -1,0 +1,40 @@
+/* Reset */
+
+html,
+body {
+    margin: unset;
+    padding: unset;
+}
+
+body {
+    background-color: #EEEEEE;
+}
+
+body,
+p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+*,
+*::before,
+*::after {
+    font: inherit;
+    box-sizing: border-box;
+}
+
+/* Typography */
+
+h2 {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 25px;
+}

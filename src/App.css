@@ -1,38 +1,162 @@
-.App {
-  text-align: center;
+/* Container */
+.todo-container {
+    margin: 100px auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Header */
+.todo-container__header {
+    padding: 30px;
+    margin: unset;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* No tasks */
+.todo-container__none {
+    padding: 45px;
+    text-align: center;
+    border-top: 1px solid #EEEEEE;
+    background-color: lightgreen;
+    background-image: radial-gradient(#229728 0.5px, transparent 0.5px),
+                      radial-gradient(#44f78c 0.5px, #e1ffd1 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0,10px 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.todo-container__none h3 {
+    margin: 0 0 10px 0;
 }
 
-.App-link {
-  color: #61dafb;
+.todo-container__none p {
+    margin: 0 auto;
+    max-width: 300px;
+    font-size: 13px;
+    line-height: 22px;
+    opacity: 0.9;
+    color: #667b67;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Tasks */
+.todo-container__tasks {
+    list-style-type: none;
+    padding: unset;
+    margin: unset;
+}
+
+.todo-container__tasks li {
+    display: grid;
+    grid-template-columns: calc(100% - 100px) 50px 50px;
+    align-items: center;
+    justify-content: space-between;
+    margin: unset;
+    padding: unset;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+.todo-container__tasks label {
+    cursor: pointer;
+    padding: 15px 30px;
+    flex-grow: 1;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.todo-container__tasks li:nth-child(odd) {
+    background-color: #F1F1F1;
+}
+
+.todo-container__tasks li.completed {
+    background-color: lightgreen;
+    color: green;
+    text-decoration: line-through;
+}
+
+.todo-container__tasks-completed,
+.todo-container__tasks-delete {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-container__tasks-delete {
+    background-color: red;
+}
+
+.todo-container__tasks li:nth-child(odd) .todo-container__tasks-delete {
+    background-color: #F10000;
+}
+
+.todo-container__tasks-delete svg {
+    display: block;
+    width: 13px;
+    height: 13px;
+    fill: #FFFFFF;
+}
+
+.todo-container__tasks input {
+    width: 13px;
+    height: 13px;
+    padding: unset;
+    margin: unset;
+}
+
+/* Footer */
+.todo-container__footer {
+    padding: 30px;
+    border-top: 1px solid #EEEEEE;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-container__footer input,
+.todo-container__footer button {
+    width: 100%;
+    margin: unset;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 5px;
+}
+
+.todo-container__footer input {
+    outline: none;
+    background-color: transparent;
+    border: 1px solid #CCCCCC;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.todo-container__footer button {
+    cursor: pointer;
+    border: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    background-color: green;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
+
+.todo-container__footer button:hover {
+    background-color: #076107;
+}
+
+.todo-container__footer button:active {
+    background-color: #084108;
 }
